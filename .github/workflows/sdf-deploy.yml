@@ -1,0 +1,44 @@
+name: SDF Deploy
+
+run-name: Deploy to Netsuite
+
+on: [push]
+
+jobs:
+  sdf-deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'Production' && 'Production' || github.ref_name == 'QA' && 'QA' || 'Sandbox' }}
+    needs: [unit-test, sdf-validate]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/sdf-install
+        with:
+          ns-account-id: ${{ vars.NS_ACCOUNT_ID }}
+          ns-token-id: ${{ secrets.NS_TOKEN_ID }}
+          ns-token-secret: ${{ secrets.NS_TOKEN_SECRET }}
+      - name: Deploy project to ${{ vars.NS_ACCOUNT_ID }}
+        run: npm run deploy
+  sdf-validate:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'Production' && 'Production' || github.ref_name == 'QA' && 'QA' || 'Sandbox' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/sdf-install
+        with:
+          ns-account-id: ${{ vars.NS_ACCOUNT_ID }}
+          ns-token-id: ${{ secrets.NS_TOKEN_ID }}
+          ns-token-secret: ${{ secrets.NS_TOKEN_SECRET }}
+      - name: Validate project against ${{ vars.NS_ACCOUNT_ID }}
+        run: npm run validate
+  unit-test:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref_name == 'Production' && 'Production' || github.ref_name == 'QA' && 'QA' || 'Sandbox' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/sdf-install
+        with:
+          ns-account-id: ${{ vars.NS_ACCOUNT_ID }}
+          ns-token-id: ${{ secrets.NS_TOKEN_ID }}
+          ns-token-secret: ${{ secrets.NS_TOKEN_SECRET }}
+      - name: Run unit tests
+        run: npm test
