@@ -65,3 +65,8 @@ export function assertString(value: any): string {
         log.error(stLogTitle, error.message)
     }
 }
+
+
+export function sum(a, b) {
+    return a + b;
+}

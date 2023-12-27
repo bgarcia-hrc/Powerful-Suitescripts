@@ -1,5 +1,6 @@
 import record from 'N/record';
 import Record from 'N/record/instance';
+import { sum } from '../src/TypeScripts';
 
 jest.mock('N/record');
 jest.mock('N/record/instance');
@@ -36,9 +37,18 @@ describe('Sample test with provided record module stubs', () => {
 	});
 });
 
-function sum(a, b) {
-    return a + b;
-}
 
-test(sum(1, 2)).toBe(3);
-test(sum(1, 2)).toBe(4);
+describe('Sample test with provided record module stubs', () => {
+	it('should add two numbers', () => {
+		// given
+		const a = 1;
+		const b = 2;
+
+		// when
+		const result = sum(a, b);
+
+		// then
+		expect(result).toBe(3);
+		expect(result).not.toBe(4);
+	});
+});
