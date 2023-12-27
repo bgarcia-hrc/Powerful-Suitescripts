@@ -8,7 +8,7 @@ jobs:
   sdf-deploy:
     runs-on: ubuntu-latest
     environment: ${{ github.ref_name == 'Production' && 'Production' || github.ref_name == 'QA' && 'QA' || 'Sandbox' }}
-    needs: [unit-test, sdf-validate]
+    needs: [unit-test, sdf-validate, ts-compile]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/sdf-install
@@ -42,3 +42,9 @@ jobs:
           ns-token-secret: ${{ secrets.NS_TOKEN_SECRET }}
       - name: Run unit tests
         run: npm test
+  ts-compile: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile TypeScript
+        run: npx tsc
