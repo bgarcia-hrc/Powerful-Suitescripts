@@ -35,3 +35,10 @@ describe('Sample test with provided record module stubs', () => {
 		expect(salesOrderId).toBe(updatedSalesOrderId);
 	});
 });
+
+function sum(a, b) {
+    return a + b;
+}
+
+test(sum(1, 2)).toBe(3);
+test(sum(1, 2)).toBe(4);
