@@ -1,0 +1,6 @@
+<manifest projecttype="ACCOUNTCUSTOMIZATION">
+  <projectname>Typescript template</projectname>
+  <frameworkversion>1.0</frameworkversion>
+  <dependencies>
+  </dependencies>
+</manifest>
