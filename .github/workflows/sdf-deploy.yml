@@ -1,6 +1,6 @@
-name: SDF Deploy dev
+name: SDF Deploy
 
-run-name: validate
+run-name: Deploy to Netsuite
 
 on: [push]
 
