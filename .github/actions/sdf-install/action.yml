@@ -23,6 +23,9 @@ runs:
         java-version: '17'
         distribution: 'oracle'
     - name: Install package
+      run: npm install
+      shell: bash
+    - name: Install package
       run: npm ci --acceptsuitecloudsdklicense
       shell: bash
     - name: Authenticate project against ${{ inputs.ns-account-id }}
