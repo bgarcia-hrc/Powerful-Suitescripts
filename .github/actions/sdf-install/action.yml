@@ -25,7 +25,7 @@ runs:
     - name: Install package
       run: npm ci --acceptsuitecloudsdklicense
       shell: bash
-    - name: Compite Typescript files
+    - name: Compile Typescript files
       run: npx tsc 
       shell: bash
     - name: Authenticate project against ${{ inputs.ns-account-id }}
