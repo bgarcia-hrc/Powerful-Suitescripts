@@ -1,6 +1,6 @@
 import record from 'N/record';
 import Record from 'N/record/instance';
-import { sum } from '../src/TypeScripts';
+import { sum } from '../src/TypeScripts/HRC_MR_Template';
 
 jest.mock('N/record');
 jest.mock('N/record/instance');
